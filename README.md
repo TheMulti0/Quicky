@@ -12,3 +12,6 @@ Meanwhile, it's just me, and Quicky.
 ## Release
 
 I have no idea.
+
+## License
+[**MIT License**](https://github.com/TheMulti0/Quicky/blob/master/LICENSE)
