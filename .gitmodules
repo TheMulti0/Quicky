@@ -1,0 +1,3 @@
+[submodule "Resources/XeZrunner.UI"]
+	path = Resources/XeZrunner.UI
+	url = https://github.com/XesignSoftware/XeZrunner.UI.git
