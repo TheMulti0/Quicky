@@ -12,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuickyApp.ViewModels;
 
 namespace QuickyApp.Views
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for HomeFrame.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class HomeControl : UserControl
     {
-        public HomePage()
+        public HomeControl()
         {
             InitializeComponent();
         }

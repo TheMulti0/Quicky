@@ -3,9 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:QuickyApp.ViewModels"
+        xmlns:views="clr-namespace:QuickyApp.Views"
         mc:Ignorable="d"
         Title="Quicky" Height="350" Width="350">
+    
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:HomeControlViewModel}">
+            <views:HomeControl />
+        </DataTemplate>
+    </Window.Resources>
 
-    <ContentControl Content="" />
+    <ContentControl Content="{Binding CurrentPageViewModel}" />
     
 </Window>
