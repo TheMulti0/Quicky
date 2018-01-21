@@ -67,11 +67,16 @@
     <Compile Include="ViewModels\HomeControlViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\WindowButtonType.cs" />
+    <Compile Include="ViewModels\WindowButtonViewModel.cs" />
     <Compile Include="Views\HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tile.xaml.cs">
       <DependentUpon>Tile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowButton.xaml.cs">
+      <DependentUpon>WindowButton.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\HomeControl.xaml">
       <SubType>Designer</SubType>
@@ -90,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Tile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

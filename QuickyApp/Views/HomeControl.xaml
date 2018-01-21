@@ -11,6 +11,7 @@
     <StackPanel fw:PointerTracker.Enabled="True" Orientation="Horizontal" Background="#feffff">
 
         <local:Tile AccentColor="CornflowerBlue" Icon="&#xE8C1;" Text="Translate" Description="Translate or detect" />
+        <local:WindowButton Icon="&#xe700;" Height="32" Width="45" ButtonType="Maximize" />
 
     </StackPanel>
     
