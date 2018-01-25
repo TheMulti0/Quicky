@@ -5,13 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuickyApp.Views"
       xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+      xmlns:viewModels="clr-namespace:QuickyApp.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        
+        <viewModels:TranslateControlViewModel x:Key="TranslateVm" />
+        
+    </UserControl.Resources>
 
     <StackPanel fw:PointerTracker.Enabled="True" Orientation="Horizontal" Background="#feffff">
 
-        <local:Tile AccentColor="CornflowerBlue" Icon="&#xE8C1;" Text="Translate" Description="Translate or detect" />
-        <local:WindowButton Icon="&#xe700;" Height="32" Width="45" ButtonType="Maximize" />
+        <local:Tile AccentColor="CornflowerBlue" Icon="&#xE8C1;" Text="Translate" Description="Translate or detect" PageViewModel="{Binding Source={StaticResource TranslateVm}}" />
 
     </StackPanel>
     

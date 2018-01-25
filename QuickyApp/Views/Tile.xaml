@@ -46,7 +46,8 @@
         </Style>
     </UserControl.Resources>
 
-    <md:Ripple Style="{StaticResource RevealStyle}">
+    <md:Ripple Style="{StaticResource RevealStyle}" 
+               PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp">
         <Grid>
 
             <StackPanel Orientation="Horizontal">

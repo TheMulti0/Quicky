@@ -10,7 +10,7 @@ using QuickyApp.Annotations;
 
 namespace QuickyApp.ViewModels
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel : INotifyPropertyChanged, IPageNavigatorViewModel
     {
         private List<IPageViewModel> _pageViewModels;
         private IPageViewModel _currentPageViewModel;
@@ -18,6 +18,7 @@ namespace QuickyApp.ViewModels
         public MainWindowViewModel()
         {
             PageViewModels.Add(new HomeControlViewModel());
+            PageViewModels.Add(new TranslateControlViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
         }
@@ -40,9 +41,9 @@ namespace QuickyApp.ViewModels
             }
         }
 
-        private void ChangeViewModel(IPageViewModel viewModel)
+        public void ChangeViewModel(IPageViewModel viewModel)
         {
-            if (!PageViewModels.Contains(viewModel))
+            if (PageViewModels.Any(vm => vm.GetType().Name != viewModel.GetType().Name))
             {
                 PageViewModels.Add(viewModel);
             }

@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace QuickyApp.ViewModels
 {
-    internal interface IPageViewModel
+    public interface IPageViewModel
     {
     }
 }

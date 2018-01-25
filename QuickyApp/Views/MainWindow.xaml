@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:QuickyApp.ViewModels"
         xmlns:views="clr-namespace:QuickyApp.Views"
+        xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Quicky" Height="350" Width="350">
     
@@ -13,11 +14,19 @@
     </Window.DataContext>
     
     <Window.Resources>
+        
         <DataTemplate DataType="{x:Type viewModels:HomeControlViewModel}">
             <views:HomeControl />
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModels:TranslateControlViewModel}">
+            <views:TranslateControl />
+        </DataTemplate>
+        
     </Window.Resources>
 
-    <ContentControl Content="{Binding CurrentPageViewModel}" />
+    <mahapps:TransitioningContentControl 
+        Content="{Binding CurrentPageViewModel}"
+        Transition="Default" />
     
 </Window>
