@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using EasyTranslate.Enums;
 using EasyTranslate.Words;
@@ -14,7 +13,25 @@ namespace QuickyApp.ViewModels
 {
     internal class TranslateControlViewModel : INotifyPropertyChanged, IPageViewModel
     {
+        private TranslateLanguages _chosenLanguage;
+        private TranslateWord _finalWord;
         private string _originalWord;
+
+        public IEnumerable<TranslateLanguages> Languages { get; set; }
+
+        public TranslateLanguages ChosenLanguage
+        {
+            get => _chosenLanguage;
+            set
+            {
+                if (_chosenLanguage == value)
+                {
+                    return;
+                }
+                _chosenLanguage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string OriginalWord
         {
@@ -31,8 +48,6 @@ namespace QuickyApp.ViewModels
             }
         }
 
-        private TranslateWord _finalWord;
-
         public TranslateWord FinalWord
         {
             get => _finalWord;
@@ -48,13 +63,21 @@ namespace QuickyApp.ViewModels
             }
         }
 
-        public async Task<TranslateWord> Operate(TranslateWord word = null, TranslateLanguages? targetLanguage = null)
+        public TranslateControlViewModel()
         {
-            if (word == null)
-            {
-                word = new TranslateWord(OriginalWord);
-            }
+            Languages = Enum.GetValues(typeof(TranslateLanguages)).Cast<TranslateLanguages>();
+        }
 
+        public async Task OperateTranslation() 
+            => FinalWord = 
+                await Translate(
+                    new TranslateWord(OriginalWord),
+                    ChosenLanguage);
+
+        private async Task<TranslateWord> Translate(
+            TranslateWord word = null,
+            TranslateLanguages? targetLanguage = null)
+        {
             var result = new TranslateWord("");
             var taskFactory = new TaskFactory();
             var model = new TranslateControlModel();
@@ -65,7 +88,9 @@ namespace QuickyApp.ViewModels
             //}
             if (targetLanguage != null)
             {
-                result = await taskFactory.StartNew((() => model.Translate(word, (TranslateLanguages) targetLanguage)));
+                result = await taskFactory
+                    .StartNew(() => model
+                                  .Translate(word, (TranslateLanguages) targetLanguage));
             }
 
             return result;

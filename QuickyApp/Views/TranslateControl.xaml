@@ -17,9 +17,14 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="260" />
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
         
-        <StackPanel Grid.Row="0">
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding ChosenLanguage}" />
+
             <Button Click="Button_OnClick" Content="Translate" />
+        
         </StackPanel>
         
         <DockPanel Grid.Row="1">

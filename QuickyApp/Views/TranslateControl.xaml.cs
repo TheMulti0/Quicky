@@ -33,6 +33,6 @@ namespace QuickyApp.Views
         }
 
         private async void Button_OnClick(object sender, RoutedEventArgs e)
-            => _vm.FinalWord = await _vm.Operate(new TranslateWord(_vm.OriginalWord), TranslateLanguages.French);
+            => await _vm.OperateTranslation();
     }
 }
