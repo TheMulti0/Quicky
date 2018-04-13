@@ -13,22 +13,34 @@ namespace QuickyApp.ViewModels
 {
     internal class TranslateControlViewModel : INotifyPropertyChanged, IPageViewModel
     {
-        private TranslateLanguages _chosenLanguage;
+
+        private TranslateLanguages _chosenTargetLanguage;
+
         private TranslateWord _finalWord;
         private string _originalWord;
+        private List<object> _languages;
 
-        public IEnumerable<TranslateLanguages> Languages { get; set; }
-
-        public TranslateLanguages ChosenLanguage
+        public TranslateControlViewModel()
         {
-            get => _chosenLanguage;
+            Array values = Enum.GetValues(typeof(TranslateLanguages));
+            Languages = values
+                        .Cast<object>()
+                        .ToList();
+
+            Languages.Insert(1, "Detect language");
+        }
+
+        public List<object> Languages
+        {
+            get => _languages;
             set
             {
-                if (_chosenLanguage == value)
+                if (_languages == value)
                 {
                     return;
                 }
-                _chosenLanguage = value;
+
+                _languages = value;
                 OnPropertyChanged();
             }
         }
@@ -63,21 +75,35 @@ namespace QuickyApp.ViewModels
             }
         }
 
-        public TranslateControlViewModel()
+        public TranslateLanguages ChosenTargetLanguage
         {
-            Languages = Enum.GetValues(typeof(TranslateLanguages)).Cast<TranslateLanguages>();
+            get => _chosenTargetLanguage;
+            set
+            {
+                if (_chosenTargetLanguage == value)
+                {
+                    return;
+                }
+
+                _chosenTargetLanguage = value;
+                OnPropertyChanged();
+            }
         }
 
-        public async Task OperateTranslation() 
-            => FinalWord = 
-                await Translate(
-                    new TranslateWord(OriginalWord),
-                    ChosenLanguage);
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private async Task<TranslateWord> Translate(
-            TranslateWord word = null,
-            TranslateLanguages? targetLanguage = null)
+        public async Task<TranslateWord> Operate(TranslateWord word = null, TranslateLanguages? targetLanguage = null)
         {
+            if (word == null)
+            {
+                word = new TranslateWord(OriginalWord);
+            }
+
+            if (targetLanguage == null)
+            {
+                targetLanguage = ChosenTargetLanguage;
+            }
+
             var result = new TranslateWord("");
             var taskFactory = new TaskFactory();
             var model = new TranslateControlModel();
@@ -86,22 +112,19 @@ namespace QuickyApp.ViewModels
             //{
             //    result = await taskFactory.StartNew(() => model.Detect(word));
             //}
-            if (targetLanguage != null)
+            //if (word//Language != null)
             {
-                result = await taskFactory
-                    .StartNew(() => model
-                                  .Translate(word, (TranslateLanguages) targetLanguage));
+                result = await taskFactory.StartNew(() => model.Translate(word, (TranslateLanguages) targetLanguage));
             }
 
             return result;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

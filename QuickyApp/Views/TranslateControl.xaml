@@ -5,26 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuickyApp.Views"
              xmlns:viewModels="clr-namespace:QuickyApp.ViewModels"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:easytranslate="clr-namespace:EasyTranslate.Enums;assembly=EasyTranslate"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.DataContext>
         <viewModels:TranslateControlViewModel />
     </UserControl.DataContext>
+    
+    <UserControl.Resources>
+
+        <ObjectDataProvider x:Key="translateLanguages" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="easytranslate:TranslateLanguages"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="260" />
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
         
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <ComboBox ItemsSource="{Binding Languages, Mode=TwoWay}"
+                      SelectedItem="{Binding ChosenTargetLanguage}"
+                      HorizontalAlignment="Center" />
+
+            <Button Click="Button_OnClick" Content="T" />
+
             <ComboBox ItemsSource="{Binding Languages}"
-                      SelectedItem="{Binding ChosenLanguage}" />
-
-            <Button Click="Button_OnClick" Content="Translate" />
-        
+                      SelectedItem="{Binding ChosenTargetLanguage}" />
+            
         </StackPanel>
         
         <DockPanel Grid.Row="1">

@@ -13,10 +13,8 @@ namespace QuickyApp.Models
     {
         private readonly ITranslator _translator;
 
-        public TranslateControlModel()
-        {
-            _translator = new GoogleTranslateClassicTranslator();
-        }
+        public TranslateControlModel() 
+            => _translator = new GoogleTranslateClassicTranslator();
 
         public TranslateWord Translate(TranslateWord word, TranslateLanguages targetLanguage)
             => _translator.Translate(word, targetLanguage);
