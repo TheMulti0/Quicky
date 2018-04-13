@@ -16,7 +16,8 @@ namespace QuickyApp.Views
     /// </summary>
     public partial class Tile : UserControl
     {
-        private Stopwatch _stopWatch;
+        private readonly Stopwatch _stopWatch;
+        private readonly double _navigationInterval = 300;
 
         public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(
             "AccentColor", typeof(Brush), typeof(Tile), new PropertyMetadata(Brushes.Black));
@@ -58,10 +59,10 @@ namespace QuickyApp.Views
         {
             _stopWatch.Stop();
             double time = 25000.0 / _stopWatch.ElapsedMilliseconds;
-
-            if (time > 225.0)
+            
+            if (time > _navigationInterval)
             {
-                time = 225.0;
+                time = _navigationInterval;
             }
             await Task.Delay(TimeSpan.FromMilliseconds(time));
 
