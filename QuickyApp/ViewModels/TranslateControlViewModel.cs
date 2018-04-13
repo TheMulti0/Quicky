@@ -101,16 +101,6 @@ namespace QuickyApp.ViewModels
         private async Task<TranslateWord> Translate(TranslateWord word = null,
                                                     TranslateLanguages? targetLanguage = null)
         {
-            if (word == null)
-            {
-                word = new TranslateWord(OriginalWord);
-            }
-
-            if (targetLanguage == null)
-            {
-                targetLanguage = ChosenTargetLanguage;
-            }
-
             var result = new TranslateWord("");
             var taskFactory = new TaskFactory();
             var model = new TranslateControlModel();
@@ -119,9 +109,12 @@ namespace QuickyApp.ViewModels
             //{
             //    result = await taskFactory.StartNew(() => model.Detect(word));
             //}
-            //if (word//Language != null)
+
+            if (targetLanguage != null)
             {
-                result = await taskFactory.StartNew(() => model.Translate(word, (TranslateLanguages) targetLanguage));
+                result = await taskFactory
+                    .StartNew(() => model
+                                  .Translate(word, (TranslateLanguages) targetLanguage));
             }
 
             return result;
