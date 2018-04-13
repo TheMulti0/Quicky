@@ -17,8 +17,8 @@ namespace QuickyApp.ViewModels
         private TranslateLanguages _chosenTargetLanguage;
 
         private TranslateWord _finalWord;
-        private string _originalWord;
         private List<object> _languages;
+        private string _originalWord;
 
         public TranslateControlViewModel()
         {
@@ -27,7 +27,7 @@ namespace QuickyApp.ViewModels
                         .Cast<object>()
                         .ToList();
 
-            Languages.Insert(1, "Detect language");
+            Languages.Insert(0, "Detect language");
         }
 
         public List<object> Languages
@@ -92,7 +92,14 @@ namespace QuickyApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public async Task<TranslateWord> Operate(TranslateWord word = null, TranslateLanguages? targetLanguage = null)
+        public async Task<TranslateWord> OperateTranslation()
+            => FinalWord =
+                await Translate(
+                                new TranslateWord(OriginalWord),
+                                ChosenTargetLanguage);
+
+        private async Task<TranslateWord> Translate(TranslateWord word = null,
+                                                    TranslateLanguages? targetLanguage = null)
         {
             if (word == null)
             {
