@@ -7,10 +7,10 @@ The purpose of Quicky is to let the average user an option to do useful actions.
 Meanwhile, it's just me, and Quicky.
 
 ### Official Contributors
-* [**TheMulti0 / Raphaelbox**](https://github.com/TheMulti0)
+* [**TheMulti0**](https://github.com/TheMulti0)
 
 ### Roles
-* [**TheMulti0 / Raphaelbox**](https://github.com/TheMulti0) - Founder, Manager, Developer, Designer
+* [**TheMulti0**](https://github.com/TheMulti0) - Founder, Manager, Developer, Designer
 
 ## Release
 
